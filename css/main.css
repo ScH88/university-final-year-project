@@ -1,0 +1,416 @@
+/** BASE - Base styles, variables, mixins e.t.c **/
+/* FONT COLOURS */
+/* BACKGROUND COLOURS */
+/* DIMENSIONS */
+/* MIXINS */
+/* line 1, ../scss/base/_normalize.scss */
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* line 6, ../scss/base/_normalize.scss */
+h1, h2, h3, h4, h5 {
+  margin-top: 0;
+}
+
+/* line 10, ../scss/base/_normalize.scss */
+.page-header {
+  margin-top: 30px;
+}
+
+/* line 14, ../scss/base/_normalize.scss */
+.no-pad-top {
+  padding-top: 0;
+}
+
+/* line 18, ../scss/base/_normalize.scss */
+.extra-pad {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* line 23, ../scss/base/_normalize.scss */
+.top-inner {
+  padding-top: 90px;
+  padding-bottom: 30px;
+}
+
+/* line 28, ../scss/base/_normalize.scss */
+.clearfix {
+  clear: both;
+}
+
+/* line 1, ../scss/base/_base.scss */
+body {
+  font-family: "Segoe UI", "Segoe WP", "Segoe Regular", sans-serif;
+  font-size: 16px;
+  line-height: 1.7em;
+  color: black;
+  background: white;
+}
+
+/* line 9, ../scss/base/_base.scss */
+a {
+  color: #00a4e4;
+}
+
+/* line 13, ../scss/base/_base.scss */
+ul, li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+/* line 19, ../scss/base/_base.scss */
+p {
+  text-align: justify;
+  margin-bottom: 10px;
+}
+
+/* line 24, ../scss/base/_base.scss */
+input, textarea, button {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+/* line 28, ../scss/base/_base.scss */
+h1, h2, h3 {
+  text-align: center !important;
+  font-weight: bold !important;
+  margin: 0 !important;
+  padding-bottom: 15px !important;
+  padding-top: 15px !important;
+}
+
+/* line 36, ../scss/base/_base.scss */
+h2 {
+  padding: 5px !important;
+}
+
+/* line 40, ../scss/base/_base.scss */
+h5 {
+  text-align: justify;
+  margin-bottom: 10px;
+}
+
+/* line 45, ../scss/base/_base.scss */
+section {
+  padding: 30px 0;
+  width: 90%;
+  margin: auto;
+}
+
+/* line 51, ../scss/base/_base.scss */
+td {
+  padding: 5px;
+  text-align: center;
+}
+
+/** MODULES - Individual Website Components **/
+/* LISTS */
+/* line 3, ../scss/modules/_typography.scss */
+.list {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+/* line 6, ../scss/modules/_typography.scss */
+.list li {
+  color: white;
+}
+
+/* MISC */
+/* line 13, ../scss/modules/_typography.scss */
+.ensure-word-break {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* STANDARD BLOCKS */
+/* line 3, ../scss/modules/_blocks.scss */
+.block, .block-light {
+  padding: 10px;
+}
+
+/* line 7, ../scss/modules/_blocks.scss */
+.block-light {
+  background: #00a4e4;
+  color: white;
+}
+
+/* line 12, ../scss/modules/_blocks.scss */
+.block-center {
+  text-align: center !important;
+}
+
+/* BUTTONS */
+/* line 3, ../scss/modules/_buttons.scss */
+.flex-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  resize: vertical;
+  overflow: auto;
+}
+
+/* line 11, ../scss/modules/_buttons.scss */
+.btn-primary, .btn-secondary {
+  background: #00a4e4;
+  border: 2px solid #0303ff;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  color: white;
+  background-color: #00a4e4;
+  font-weight: bold;
+  height: auto;
+  font-size: 2em;
+  white-space: normal;
+  word-wrap: break-word;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-bottom: 15px;
+  padding-right: 10px;
+}
+
+/* line 28, ../scss/modules/_buttons.scss */
+.btn-secondary {
+  font-size: 1.3em;
+}
+
+/* line 33, ../scss/modules/_buttons.scss */
+.btn-primary:hover, .btn-secondary:hover, .btn-secondary:hover {
+  background: #00b6fe;
+  border: 2px solid #0303ff;
+}
+
+/* line 38, ../scss/modules/_buttons.scss */
+.btn-primary:hover:active, .btn-secondary:hover:active, .btn-primary:hover:active, .btn-secondary:hover:active {
+  background: #007fb1;
+  border: 2px solid #005b7e;
+}
+
+/* line 43, ../scss/modules/_buttons.scss */
+.btn-primary:focus, .btn-secondary:focus, .btn-primary:active, .btn-secondary:active, .btn-secondary:focus, .btn-secondary:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* line 48, ../scss/modules/_buttons.scss */
+.btn-primary:active:focus, .btn-secondary:active:focus, .btn-secondary:active:focus {
+  background: #0092cb !important;
+}
+
+/* line 1, ../scss/modules/_components.scss */
+.gpsDiv {
+  width: 100%;
+}
+
+/* FORM COMPONENTS */
+/* line 3, ../scss/modules/_forms.scss */
+.form-control {
+  font-size: 1.3em;
+  width: 100%;
+  color: black;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+/* line 1, ../scss/modules/_images.scss */
+.banner-image {
+  width: 100%;
+}
+
+/** LAYOUTS - Page Layout Styles **/
+/* line 2, ../scss/layouts/_header.scss */
+header .banner {
+  min-height: 100px;
+  text-align: center;
+}
+
+/* NAVBAR */
+/* line 3, ../scss/layouts/_nav.scss */
+.navbar {
+  min-height: 60px;
+  padding-top: 10px;
+  background-color: #00a4e4;
+}
+/* line 7, ../scss/layouts/_nav.scss */
+.navbar a {
+  color: white !important;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  padding: 15px 20px 15px 20px !important;
+  margin: 5px 10px 0 10px !important;
+}
+
+/* line 19, ../scss/layouts/_nav.scss */
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus,
+.navbar-nav > .active > a, .navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus {
+  background: white !important;
+  color: #00a4e4 !important;
+}
+
+/* line 24, ../scss/layouts/_nav.scss */
+.navbar-nav > li > a:active {
+  background: #00009c !important;
+  color: white !important;
+}
+
+/* FOOTER */
+/* line 3, ../scss/layouts/_footer.scss */
+.footer-main {
+  background: #00a4e4;
+  color: white;
+  min-height: 200px;
+  padding: 10px;
+  font-size: 1.2em;
+}
+/* line 9, ../scss/layouts/_footer.scss */
+.footer-main a {
+  color: #FFF;
+}
+/* line 13, ../scss/layouts/_footer.scss */
+.footer-main ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 17, ../scss/layouts/_footer.scss */
+.footer-main li {
+  line-height: 1.5em;
+  list-style: none;
+}
+
+/* 
+*
+*
+* POINT OF MOBILE/TABLET NAVBAR COMPRESSION & CONTAINER-FLUID REPOSITIONING 
+*
+*
+*/
+@media (max-width: 767px) {
+  /* NAVIGATION */
+  /* line 12, ../scss/layouts/_mobile.scss */
+  .navbar-nav > li > a {
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+  }
+
+  /* line 17, ../scss/layouts/_mobile.scss */
+  .navbar-collapse {
+    margin-top: 10px;
+  }
+
+  /* IMAGES */
+  /* line 22, ../scss/layouts/_mobile.scss */
+  .banner-image {
+    height: 65px;
+  }
+
+  /* line 26, ../scss/layouts/_mobile.scss */
+  .image {
+    display: block;
+    margin: 20px auto 0 auto;
+  }
+
+  /* FOOTER */
+  /* line 33, ../scss/layouts/_mobile.scss */
+  .footer-main ul {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  /* line 38, ../scss/layouts/_mobile.scss */
+  .footer-main h4 {
+    text-align: center;
+  }
+}
+@media (max-width: 640px) {
+  /* COMPONENTS */
+  /* line 46, ../scss/layouts/_mobile.scss */
+  .gpsDiv {
+    height: 330px;
+  }
+}
+@media (max-width: 480px) {
+  /* COMPONENTS */
+  /* line 53, ../scss/layouts/_mobile.scss */
+  .gpsDiv {
+    height: 200px;
+  }
+
+  /* TYPOGRAPHY */
+  /* line 58, ../scss/layouts/_mobile.scss */
+  h1 {
+    font-size: 2em;
+  }
+}
+@media (max-width: 320px) {
+  /* IMAGES */
+  /* line 65, ../scss/layouts/_mobile.scss */
+  .banner-image {
+    height: 60px;
+  }
+}
+@media print {
+  @page {
+    size: A4;
+}
+
+  /* line 7, ../scss/layouts/_print.scss */
+  header {
+    height: 60px;
+  }
+
+  /* line 11, ../scss/layouts/_print.scss */
+  body {
+    overflow-y: visible !important;
+    width: auto !important;
+    font-size: 1.5em !important;
+    line-height: 25px !important;
+  }
+
+  /* line 18, ../scss/layouts/_print.scss */
+  .hidden-print {
+    display: none !important;
+  }
+
+  /* line 22, ../scss/layouts/_print.scss */
+  section {
+    color: black !important;
+    background-color: white !important;
+    height: auto !important;
+    width: auto !important;
+    position: relative !important;
+    float: none !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 15px !important;
+    page-break-inside: avoid;
+  }
+
+  /* line 37, ../scss/layouts/_print.scss */
+  row {
+    margin: 0 !important;
+  }
+
+  /* line 41, ../scss/layouts/_print.scss */
+  h1 {
+    margin: 0 !important;
+  }
+}
