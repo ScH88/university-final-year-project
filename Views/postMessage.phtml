@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><?php echo $view->pageTitle; ?> - TreasureQuest</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css" media="all">
+        <!-- Custom styles for this template -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php require('template/header.phtml') ?>
+        <main>
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                            <h1>Send Message</h1>
+                            <br/>
+                            <p>From: <?php echo htmlentities($view->sessionUsername); ?></p> 
+                            <form method="post" enctype="multipart/form-data" id="newMessageForm" action="control.php?action=postMessage">
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="reciever-input" class="col-sm-2 col-form-label">
+                                        Send To(*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <select name="receiver" id="reciever-input" class="form-control">
+                                            <option value="The TreasureQuest Team">The Entire TreasureQuest Team</option>
+                                            <?php foreach ($view->userList as $user): ?>
+                                                <?php if ($user->getUsername() === $view->sessionUsername): ?>
+                                                    <option value="<?php $user->getUsername(); ?>"><?php $user->getUsername(); ?>(YOU)</option>
+                                                <?php elseif ($user->getStatus() === "Admin"): ?>
+                                                    <option value="<?php $user->getUsername(); ?>"><?php $user->getUsername(); ?>(ADMIN)</option>
+                                                <?php else: ?>
+                                                    <option value="<?php $user->getUsername(); ?>"><?php $user->getUsername(); ?></option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="subject-text" class="col-sm-2 col-form-label">
+                                        Subject(*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input name="subject" id="subject-text" class="form-control" maxlength="100">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-10">
+                                        <textarea name="content" id="content-text" class="form-control" maxlength="1000" rows="15"></textarea>
+                                    <input type="hidden" name="sender" value="<?php $view->sessionUsername; ?>">
+                                    <input type="hidden" name="receiverID">
+                                    <input type="hidden" name="username">
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row"> 
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-10">
+                                        <input name="submit" type="submit" class="btn btn-primary btn-lg btn-block hidden-print" value="Submit Details">
+                                    </div>
+                                    <div class="col-sm-10"></div>
+                                </div>
+                            </form>
+                            <p><?php echo htmlentities($view->messageTab); ?></p>
+                    </div> 
+                </div>
+            </section>
+        </main>
+        <?php require('template/footer.phtml') ?>
+        <script type="text/javascript">
+            //Create a variable for storing the value of the php page's latitude variable
+            var checkLat = '<?php echo $view->latitude; ?>';
+            //Create a variable for storing the value of the php page's longitude variable
+            var checkLng = '<?php echo $view->longitude; ?>';
+            //Create a variable for storing the value of the php page's accuracy variable
+            var checkAcc = '<?php echo $view->accuracy; ?>';
+
+            //If the latitude, longitude and accuracy all equal false (i.e. if the user is not operating a mobile device and/or is logged off
+            if (checkLat == false && checkLng == false && checkAcc == false) {
+                //Do Nothing 
+                //Otherwise, if the latitude, longitude and accuracy variables all equal true (i.e. if the user is operating a mobile device and is logged on)
+            } else {
+                //If the device picks up a location via router or radio mast
+                if (navigator.geolocation) {
+                    //Set up the location details in the followign function
+                    navigator.geolocation.watchPosition(function (loc) {
+                        //Create a form element for storing the location details
+                        var userLocation = new Element('form', {
+                            'id': 'userLocForm',
+                            'name': 'userLocForm',
+                            'action': '#',
+                            'method': 'post'
+                        });
+                        //Create a hidden input variable for storing the location's latitude
+                        new Element('input', {
+                            'id': 'latitude',
+                            'name': 'latitude',
+                            'type': 'hidden',
+                            'value': loc.coords.latitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's longitude
+                        new Element('input', {
+                            'id': 'longitude',
+                            'name': 'longitude',
+                            'type': 'hidden',
+                            'value': loc.coords.longitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's accuracy
+                        new Element('input', {
+                            'id': 'accuracy',
+                            'name': 'accuracy',
+                            'type': 'hidden',
+                            'value': loc.coords.accuracy
+                        }).inject(userLocation);
+                        //Create a request to send the form to the control.php page before calling it's userLocation method
+                        var req = new Request.JSON({
+                            url: 'control.php?action=userLocation',
+                            onsuccess: ""
+                        }).post(userLocation);
+                        //Send the request
+                        req.send();
+                        //If the user chooses to share his/her location details
+                        if (console)
+                            console.log(loc);
+                        //Perform the following function
+                    }, function () {
+                    }, {enableHighAccuracy: true});
+                    //Otherwise, if the user chooses to not share his/her location details
+                } else {
+                    //Do Nothing
+                }
+            }
+        </script>
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>  
+        <script>
+            jQuery(function ($) {
+                $.noConflict();
+                $(document).ready(function () {
+                    //Create a variable pointing to the form as a whole
+                    var $formDiv = $('#newMessageForm');
+                    //Variable for referencing the select field whose name equals "receiver"
+                    var $receiver = $('input[name="receiver"]');
+                    //Variable for referencing the input field whose name equals "subject"
+                    var $subject = $('input[name="subject"]');
+                    //Variable for referencing the textarea whose name equals "content"
+                    var $content = $('input[name="content"]');
+                    //Assign an event handler to the button, in this case, if the button has been clicked
+                    $formDiv.submit(function (e) {
+                        //If the session ID (represented as a local php variable) have been deleted
+                        if ('<?php echo $view->sessionID; ?>' === "") {
+                            //Redirect to the login page
+                            window.location = 'login.php';
+                        //Otherwise, if either of the IDs have been found
+                        } else {
+                            //Create a boolean ticket value
+                            var ticket = true;
+                            //If the contentText textarea element is empty
+                            if ($receiver.value === "") {
+                                //Stop the form from being sent
+                                e.stop();
+                                //Change the color of the textarea to red
+                                $receiver.css("backgroundColor", "red");
+                                //Set the ticket value to false
+                                ticket = false;
+                            } else {
+                                //Change the color of the textarea to white
+                                $receiver.css("backgroundColor", "white");
+                            }
+                            //If the contentText textarea element is empty
+                            if ($content.value === "") {
+                                //Stop the form from being sent
+                                e.stop();
+                                //Change the color of the textarea to red
+                                $content.css("backgroundColor", "red");
+                                //Set the ticket value to false
+                                ticket = false;
+                            } else {
+                                //Change the color of the textarea to white
+                                $content.css("backgroundColor", "white");
+                            }
+                            //If the ticket value has been changed to false
+                            if (ticket === false) {
+                                //Do nothing
+                                //Otherwise, if the ticket value has been changed to true
+                            } else if (ticket === true) {
+                                //Submit the form using AJAX.
+                                $.ajax({
+                                    //Set the type to "POST"
+                                    type: 'POST',
+                                    //Set the destination url as the form's action
+                                    url: $formDiv.attr('action'),
+                                    //Set the data to be sent as the data array defined before
+                                    data: $formDiv.serialize()
+                                    //data: new FormData($formData)
+                                }).done(function (response) {
+                                    //Once successful, redirect to the messageSent page
+                                    window.location.href = "messageListing.php";
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

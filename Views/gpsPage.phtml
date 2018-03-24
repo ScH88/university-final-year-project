@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><?php echo $view->pageTitle; ?> - TreasureQuest</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css" media="all">
+        <!-- Custom styles for this template -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php require('template/header.phtml') ?>
+        <main>
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <h1>GPS Page</h1>
+                            <?php foreach ($view->sessionList as $sessFile) : ?>
+                                <p><?php echo htmlentities($sessFile); ?></p>
+                            <?php endforeach; ?>
+                            <div id="googleMap" class="gpsDiv"></div>
+                            <div id="sessionList"></div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div> 
+                </div>
+            </section>
+        </main>
+        <?php require('template/footer.phtml') ?>
+        <script type="text/javascript">
+            //Create a variable for storing the value of the php page's latitude variable
+            var checkLat = '<?php echo $view->latitude; ?>';
+            //Create a variable for storing the value of the php page's longitude variable
+            var checkLng = '<?php echo $view->longitude; ?>';
+            //Create a variable for storing the value of the php page's accuracy variable
+            var checkAcc = '<?php echo $view->accuracy; ?>';
+
+            //If the latitude, longitude and accuracy all equal false (i.e. if the user is not operating a mobile device and/or is logged off
+            if (checkLat == false && checkLng == false && checkAcc == false) {
+                //Do Nothing 
+                //Otherwise, if the latitude, longitude and accuracy variables all equal true (i.e. if the user is operating a mobile device and is logged on)
+            } else {
+                //If the device picks up a location via router or radio mast
+                if (navigator.geolocation) {
+                    //Set up the location details in the followign function
+                    navigator.geolocation.watchPosition(function (loc) {
+                        //Create a form element for storing the location details
+                        var userLocation = new Element('form', {
+                            'id': 'userLocForm',
+                            'name': 'userLocForm',
+                            'action': '#',
+                            'method': 'post'
+                        });
+                        //Create a hidden input variable for storing the location's latitude
+                        new Element('input', {
+                            'id': 'latitude',
+                            'name': 'latitude',
+                            'type': 'hidden',
+                            'value': loc.coords.latitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's longitude
+                        new Element('input', {
+                            'id': 'longitude',
+                            'name': 'longitude',
+                            'type': 'hidden',
+                            'value': loc.coords.longitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's accuracy
+                        new Element('input', {
+                            'id': 'accuracy',
+                            'name': 'accuracy',
+                            'type': 'hidden',
+                            'value': loc.coords.accuracy
+                        }).inject(userLocation);
+                        //Create a request to send the form to the control.php page before calling it's userLocation method
+                        var req = new Request.JSON({
+                            url: 'control.php?action=userLocation',
+                            onsuccess: ""
+                        }).post(userLocation);
+                        //Send the request
+                        req.send();
+                        //If the user chooses to share his/her location details
+                        if (console)
+                            console.log(loc);
+                        //Perform the following function
+                    }, function () {
+                    }, {enableHighAccuracy: true});
+                    //Otherwise, if the user chooses to not share his/her location details
+                } else {
+                    //Do Nothing
+                }
+            }
+        </script>
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0bF-ZbD1O9MWsqtHUzYXqMzPyRjamgAo&sensor=false">
+        </script>
+        <script>
+            function initialize() {
+                //Create a variable for storing the value of the php page's (main clue) latitude variable
+                var mainClueLat = '<?php echo $view->clueLatitude; ?>';
+                //Create a variable for storing the value of the php page's (main clue) longitude variable
+                var mainClueLng = '<?php echo $view->clueLongitude; ?>';
+                //Create a variable for the next hunt clue by calling the google class' LatLng method (by passing the latitude and longitude variables)
+                var nextHuntClue = new google.maps.LatLng(mainClueLat, mainClueLng);
+                //Create the following variable, which will center the map view to the hunt clue location, zoom by 15 and set the ID as "roadmap"
+                var mapProp = {
+                    center: new google.maps.LatLng(mainClueLat, mainClueLng),
+                    zoom: 15,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                //Set up the map by calling the google maps class' MAP, then passing it the googleMap div in the page body
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                //Set up the map marker for the hunt clue by passing it the nextHuntClue variable as the location and the animation as "bounce" 
+                var marker = new google.maps.Marker({
+                    position: nextHuntClue,
+                    animation: google.maps.Animation.BOUNCE
+                });
+                //Place the hunt clue marker on the map
+                marker.setMap(map);
+
+                //Create a variable for storing the value of the php page's (alternate path 1 main clue) latitude variable
+                var mainClueLat2 = '<?php echo $view->clueLatitude2; ?>';
+                //Create a variable for storing the value of the php page's (alternate path 1 main clue) longitude variable
+                var mainClueLng2 = '<?php echo $view->clueLongitude2; ?>';
+                //Create a variable for the next hunt clue by calling the google class' LatLng method (by passing the latitude and longitude variables)
+                var nextHuntClue2 = new google.maps.LatLng(mainClueLat2, mainClueLng2);
+                //Create the following variable, which will center the map view to the hunt clue location, zoom by 15 and set the ID as "roadmap"
+                var mapProp2 = {
+                    center: new google.maps.LatLng(mainClueLat2, mainClueLng2),
+                    zoom: 15,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                //Set up the map marker for the hunt clue by passing it the nextHuntClue variable as the location and the animation as "bounce" 
+                var marker2 = new google.maps.Marker({
+                    position: nextHuntClue2,
+                    animation: google.maps.Animation.BOUNCE
+                });
+                //Place the hunt clue marker on the map
+                marker2.setMap(map);
+
+
+                //Create a variable for storing the value of the php page's (alternate path 2 main clue) latitude variable
+                var mainClueLat3 = '<?php echo $view->clueLatitude3; ?>';
+                //Create a variable for storing the value of the php page's (alternate path 2 main clue) longitude variable
+                var mainClueLng3 = '<?php echo $view->clueLongitude3; ?>';
+                //Create a variable for the next hunt clue by calling the google class' LatLng method (by passing the latitude and longitude variables)
+                var nextHuntClue3 = new google.maps.LatLng(mainClueLat3, mainClueLng3);
+                //Create the following variable, which will center the map view to the hunt clue location, zoom by 15 and set the ID as "roadmap"
+                var mapProp = {
+                    center: new google.maps.LatLng(mainClueLat3, mainClueLng3),
+                    zoom: 15,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                //Set up the map marker for the hunt clue by passing it the nextHuntClue variable as the location and the animation as "bounce" 
+                var marker3 = new google.maps.Marker({
+                    position: nextHuntClue3,
+                    animation: google.maps.Animation.BOUNCE
+                });
+                //Place the hunt clue marker on the map
+                marker3.setMap(map);
+
+                //Create a variable for storing the value of the php page's (user) latitude variable
+                var checkLat = '<?php echo $view->latitude; ?>';
+                //Create a variable for storing the value of the php page's (user) longitude variable
+                var checkLng = '<?php echo $view->longitude; ?>';
+                //Create a variable for storing the value of the php page's (user) accuracy variable
+                var checkAcc = '<?php echo $view->accuracy; ?>';
+                //If the latitude, longitude and accuracy variables all equal false (i.e. the user is not operating a mobile device and/or is not logged in)
+                if (checkLat == false && checkLng == false && checkAcc == false) {
+                    //Do Nothing 
+                    //Otherwise, if the latitude, longitude and accuracy variables all equal true (i.e. the user is operating a mobile device and is also logged in)
+                } else {
+                    //Retrieve the php variable used for storing usernames, latitudes and longitudes
+                    var sessionList = new Array("<?= implode("\",\"", $view->sessionList); ?>");
+                    //Declare a variable used for temporarily storing latitude values
+                    var lat = "";
+                    //Declare a variable used for temporarily storing longitude values
+                    var lng = "";
+                    //Declare a variable used for temporarily storing username values
+                    var usr = "";
+                    //Declare an interval variable with a default value of 1
+                    var interval = 1;
+                    //Scroll through each item in the retrieved php array, with each current item as "item"
+                    sessionList.forEach(function (item) {
+                        //If the interval equals 1
+                        if (interval == 1) {
+                            //Declare the latitude variable as the item
+                            lat = item;
+                            //Increase the interval value by 1
+                            interval = interval + 1;
+                            //If the interval equals 2
+                        } else if (interval == 2) {
+                            //Declare the longitude variable as the item
+                            lng = item;
+                            //Increase the interval value by 1
+                            interval = interval + 1;
+                            //If the interval equals 3
+                        } else if (interval == 3) {
+                            //Declare the user variable as the item
+                            usr = item;
+                            //Create a new marker object for the user's location
+                            var userMarkerLatLng = new google.maps.LatLng(lat, lng);
+                            //initialise the marker as a new marker item, setting the position as the location indicated by the userMarkerLatLng variable
+                            var userMarker = new google.maps.Marker({
+                                position: userMarkerLatLng
+                            });
+                            //Place the marker on the map
+                            userMarker.setMap(map);
+                            //Erase the user variable's value
+                            usr = "";
+                            //Erase the latitude variable's value
+                            lat = "";
+                            //Erase the longitude variable's value
+                            lng = "";
+                            //Reset the interval variable back to 1
+                            interval = 1;
+                        }
+                    });
+                }
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script> 
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>  
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><?php echo $view->pageTitle; ?> - TreasureQuest</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css" media="all">
+        <!-- Custom styles for this template -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php require('template/header.phtml') ?>
+        <main>
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <h1>User Unavailable</h1>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div> 
+                </div>
+            </section>
+        </main>
+        <?php require('template/footer.phtml') ?>
+        <script type="text/javascript">
+            //Create a variable for storing the value of the php page's latitude variable
+            var checkLat = '<?php echo $view->latitude; ?>';
+            //Create a variable for storing the value of the php page's longitude variable
+            var checkLng = '<?php echo $view->longitude; ?>';
+            //Create a variable for storing the value of the php page's accuracy variable
+            var checkAcc = '<?php echo $view->accuracy; ?>';
+
+            //If the latitude, longitude and accuracy all equal false (i.e. if the user is not operating a mobile device and/or is logged off
+            if (checkLat == false && checkLng == false && checkAcc == false) {
+                //Do Nothing 
+                //Otherwise, if the latitude, longitude and accuracy variables all equal true (i.e. if the user is operating a mobile device and is logged on)
+            } else {
+                //If the device picks up a location via router or radio mast
+                if (navigator.geolocation) {
+                    //Set up the location details in the followign function
+                    navigator.geolocation.watchPosition(function (loc) {
+                        //Create a form element for storing the location details
+                        var userLocation = new Element('form', {
+                            'id': 'userLocForm',
+                            'name': 'userLocForm',
+                            'action': '#',
+                            'method': 'post'
+                        });
+                        //Create a hidden input variable for storing the location's latitude
+                        new Element('input', {
+                            'id': 'latitude',
+                            'name': 'latitude',
+                            'type': 'hidden',
+                            'value': loc.coords.latitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's longitude
+                        new Element('input', {
+                            'id': 'longitude',
+                            'name': 'longitude',
+                            'type': 'hidden',
+                            'value': loc.coords.longitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's accuracy
+                        new Element('input', {
+                            'id': 'accuracy',
+                            'name': 'accuracy',
+                            'type': 'hidden',
+                            'value': loc.coords.accuracy
+                        }).inject(userLocation);
+                        //Create a request to send the form to the control.php page before calling it's userLocation method
+                        var req = new Request.JSON({
+                            url: 'control.php?action=userLocation',
+                            onsuccess: ""
+                        }).post(userLocation);
+                        //Send the request
+                        req.send();
+                        //If the user chooses to share his/her location details
+                        if (console)
+                            console.log(loc);
+                        //Perform the following function
+                    }, function () {
+                    }, {enableHighAccuracy: true});
+                    //Otherwise, if the user chooses to not share his/her location details
+                } else {
+                    //Do Nothing
+                }
+            }
+        </script>
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>  
+    </body>
+</html>

@@ -1,0 +1,50 @@
+/* BUTTONS */
+
+.flex-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    resize: vertical;
+    overflow: auto;
+}
+
+.btn-primary{
+    background:$primary-blue;
+    @include add-border(2px, lighten($primary-darker-blue, 20%), "all"); 
+    @include border-radius(8px);
+    color:$secondary-white;
+    background-color:$primary-blue; 
+    font-weight:bold; 
+    height:auto;
+    font-size: 2em;
+    white-space: normal;
+    word-wrap: break-word; 
+    padding-top:15px;
+    padding-left:10px;
+    padding-bottom:15px;
+    padding-right:10px;
+}
+
+.btn-secondary {
+    @extend .btn-primary;
+    font-size: 1.3em;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background:lighten($primary-blue, 5%);
+    @include add-border(2px, lighten($primary-darker-blue, 20%), "all"); 
+}
+
+.btn-primary:hover:active, .btn-primary:hover:active {
+    background:darken($primary-blue, 10%);
+    @include add-border(2px, darken($primary-blue, 20%), "all"); 
+}
+
+.btn-primary:focus, .btn-primary:active, .btn-secondary:focus, .btn-secondary:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:active:focus, .btn-secondary:active:focus {
+    background:darken($primary-blue, 5%) !important;
+}

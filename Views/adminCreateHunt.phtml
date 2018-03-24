@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><?php echo $view->pageTitle; ?> - TreasureQuest</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css" media="all">
+        <!-- Custom styles for this template -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php require('template/header.phtml') ?>
+        <main> 
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <h1>Create New Hunt</h1>
+                            <br/>
+                            <br />
+                            <p>Please fill in the following compulsory boxes, as well as any optional clues you wish. For each clue, type in an address, consisting of building/street name and area.</p>
+                            <p>(*) - Compulsory field</p>
+                            <p>(**) - Only compulsory if the location's respective clue had been filled in</p> 
+                            <p>Disclaimer - If any of our clients discover any misleading or unintelligible clues, they have the right to report you and you will be held accountable (in which case, you will be fired. So do your job proper!).</p>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div> 
+                </div>
+            </section>
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                        <p id="newHuntForm">*******</p>
+                        <form method="post" enctype="multipart/form-data" id="formData" action="control.php?action=createNewHunt">
+                            <section>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="hunt-name-input" class="col-sm-2 col-form-label">
+                                        Hunt Name(*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="huntName" id="hunt-name-input" class="form-control" maxlength="50">                            
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue1-input" class="col-sm-2 col-form-label">
+                                        Clue 1(*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue1" id="clue1-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue1-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 1 Location(*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue1Location" id="clue1-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue2-input" class="col-sm-2 col-form-label">
+                                        Clue 2(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue2" id="clue2-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue2-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 2 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue2Location" id="clue2-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue3-input" class="col-sm-2 col-form-label">
+                                        Clue 3(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue3" id="clue3-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue3-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 3 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue3Location" id="clue3-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue4-input" class="col-sm-2 col-form-label">
+                                        Clue 4(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue4" id="clue4-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue4-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 4 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue4Location" id="clue4-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue5-input" id="clue5-input" class="col-sm-2 col-form-label">
+                                        Clue 5(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue5" id="clue5-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue5-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 5 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue5Location" id="clue5-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue6-input" class="col-sm-2 col-form-label">
+                                        Clue 6(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue6" id="clue6-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue6-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 6 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue6Location" id="clue6-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue7-input" class="col-sm-2 col-form-label">
+                                        Clue 7(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue7" id="clue7-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="clue7-loc-input" class="col-sm-2 col-form-label">
+                                        Clue 7 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="clue7Location" id="clue7-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="form-group row">
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue1-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 1(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue1" id="alt1-clue1-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue1-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 1 Location(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue1Location" id="alt1-clue1-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue2-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 2(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue2" id="alt1-clue2-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue2-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 2 Location(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue2Location" id="alt1-clue2-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue3-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 3(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue3" id="alt1-clue3-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue3-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 3 Location(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue3Location" id="alt1-clue3-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue4-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 4(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue4" id="alt1-clue4-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue4-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 4 Location(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue1Location" id="alt1-clue4-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue5-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 5(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue5" id="alt1-clue5-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue5-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 5 Location(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue5Location" id="alt1-clue5-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue6-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 6(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue6" id="alt1-clue6-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue6-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 6 Location(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue6Location" id="alt1-clue6-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue7-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 7(Optional): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue7" id="alt1-clue7-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-1"></div>
+                                        <label for="alt1-clue7-loc-input" class="col-sm-2 col-form-label">
+                                            Alternate Path 1 - Clue 7(**): 
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea name="altClue7Location" id="alt1-clue7-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue1-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 1(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue1" id="alt2-clue1-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue1-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 1 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue1Location" id="alt2-clue1-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue2-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 2(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue2" id="alt2-clue2-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue2-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 2 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue2Location" id="alt2-clue2-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue3-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 3(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue3" id="alt2-clue3-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue3-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 3 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue3Location" id="alt2-clue3-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue4-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 4(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue4" id="alt2-clue4-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue4-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 4 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue4Location" id="alt2-clue4-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue5-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 5(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue5" id="alt2-clue5-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue5-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 5 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue5Location" id="alt2-clue5-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue6-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 6(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue6" id="alt2-clue6-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue6-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 6 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue6Location" id="alt2-clue6-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue7-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 7(Optional): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue7" id="alt2-clue7-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="alt2-clue7-loc-input" class="col-sm-2 col-form-label">
+                                        Alternate Path 2 - Clue 7 Location(**): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="alt2Clue7Location" id="alt2-clue7-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="hunt-finish-input" class="col-sm-2 col-form-label">
+                                        Hunt Finish Dialog: (*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="huntFinish" id="hunt-finish-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1"></div>
+                                    <label for="hunt-finish-loc-input" class="col-sm-2 col-form-label">
+                                        Hunt Finish Dialog: (*): 
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea name="huntFinishLocation" id="hunt-finish-loc-input" class="form-control" maxlength="1000" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"></div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="container-fluid">
+                                    <div class="form-group row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <input type="hidden" name="huntStatus" value="Ongoing">
+                                                <input type="hidden" name="userID">
+                                                <input type="hidden" name="updateContent">
+                                                <input type="hidden" name="sender">
+                                                <input type="hidden" name="receiver">
+                                                <input type="hidden" name="subject">
+                                                <input type="hidden" name="updateContent">
+                                                <input type="hidden" name="content">
+                                                <input type="hidden" name="userID">
+                                                <input type="hidden" name="updateContent">
+                                                <input type="hidden" name="status">
+                                                <input type="hidden" name="newMessageID">
+                                                <input type="hidden" name="subject">
+                                                <div class="flex-holder">
+                                                    <input name="submit" type="submit" class="btn btn-primary btn-lg btn-block hidden-print" value="Submit Details">
+                                                </div>
+                                            </div>
+                                            <div id="messDiv"></div>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </div> 
+                </div>
+            </section> 
+        </main>
+        <?php require('template/footer.phtml') ?>
+        <script type="text/javascript">
+            //Create a variable for storing the value of the php page's latitude variable
+            var checkLat = '<?php echo $view->latitude; ?>';
+            //Create a variable for storing the value of the php page's longitude variable
+            var checkLng = '<?php echo $view->longitude; ?>';
+            //Create a variable for storing the value of the php page's accuracy variable
+            var checkAcc = '<?php echo $view->accuracy; ?>';
+
+            //If the latitude, longitude and accuracy all equal false (i.e. if the user is not operating a mobile device and/or is logged off
+            if (checkLat == false && checkLng == false && checkAcc == false) {
+                //Do Nothing 
+                //Otherwise, if the latitude, longitude and accuracy variables all equal true (i.e. if the user is operating a mobile device and is logged on)
+            } else {
+                //If the device picks up a location via router or radio mast
+                if (navigator.geolocation) {
+                    //Set up the location details in the followign function
+                    navigator.geolocation.watchPosition(function (loc) {
+                        //Create a form element for storing the location details
+                        var userLocation = new Element('form', {
+                            'id': 'userLocForm',
+                            'name': 'userLocForm',
+                            'action': '#',
+                            'method': 'post'
+                        });
+                        //Create a hidden input variable for storing the location's latitude
+                        new Element('input', {
+                            'id': 'latitude',
+                            'name': 'latitude',
+                            'type': 'hidden',
+                            'value': loc.coords.latitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's longitude
+                        new Element('input', {
+                            'id': 'longitude',
+                            'name': 'longitude',
+                            'type': 'hidden',
+                            'value': loc.coords.longitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's accuracy
+                        new Element('input', {
+                            'id': 'accuracy',
+                            'name': 'accuracy',
+                            'type': 'hidden',
+                            'value': loc.coords.accuracy
+                        }).inject(userLocation);
+                        //Create a request to send the form to the control.php page before calling it's userLocation method
+                        var req = new Request.JSON({
+                            url: 'control.php?action=userLocation',
+                            onsuccess: ""
+                        }).post(userLocation);
+                        //Send the request
+                        req.send();
+                        //If the user chooses to share his/her location details
+                        if (console)
+                            console.log(loc);
+                        //Perform the following function
+                    }, function () {
+                    }, {enableHighAccuracy: true});
+                    //Otherwise, if the user chooses to not share his/her location details
+                } else {
+                    //Do Nothing
+                }
+            }
+        </script>
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>  
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $.noConflict();
+                $(document).ready(function () {
+                    //Variable for referencing the input field whose name equals "hunt-name"
+                    var $huntName = $('input[name="huntName"]');
+                    //Variable for referencing the text area whose name equals "clue1"
+                    var $clue1 = $('textarea[name="clue1"]');
+                    //Variable for referencing the text area whose name equals "clue1-loc"
+                    var $clue1Loc = $('textarea[name="clue1Location"]');
+                    //Variable for referencing the text area whose name equals "clue2"
+                    var $clue2 = $('textarea[name="clue2"]');
+                    //Variable for referencing the text area whose name equals "clue2-loc"
+                    var $clue2Loc = $('textarea[name="clue2Location"]');
+                    //Variable for referencing the text area whose name equals "clue3"
+                    var $clue3 = $('textarea[name="clue3"]');
+                    //Variable for referencing the text area whose name equals "clue3-loc"
+                    var $clue3Loc = $('textarea[name="clue3Location"]');
+                    //Variable for referencing the text area whose name equals "clue4"
+                    var $clue4 = $('textarea[name="clue4"]');
+                    //Variable for referencing the text area whose name equals "clue4-loc"
+                    var $clue4Loc = $('textarea[name="clue4Location"]');
+                    //Variable for referencing the text area whose name equals "clue5"
+                    var $clue5 = $('textarea[name="clue5"]');
+                    //Variable for referencing the text area whose name equals "clue5-loc"
+                    var $clue5Loc = $('textarea[name="clue5Location"]');
+                    //Variable for referencing the text area whose name equals "clue6"
+                    var $clue6 = $('textarea[name="clue6"]');
+                    //Variable for referencing the text area whose name equals "clue6-loc"
+                    var $clue6Loc = $('textarea[name="clue6Location"]');
+                    //Variable for referencing the text area whose name equals "clue7"
+                    var $clue7 = $('textarea[name="clue7"]');
+                    //Variable for referencing the text area whose name equals "clue7-loc"
+                    var $clue7Loc = $('textarea[name="clue7Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue1"
+                    var $alt1Clue1 = $('textarea[name="altClue1"]');
+                    //Variable for referencing the text area whose name equals "alt1clue1-loc"
+                    var $alt1Clue1Loc = $('textarea[name="altClue1Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue2"
+                    var $alt1Clue2 = $('textarea[name="altClue2"]');
+                    //Variable for referencing the text area whose name equals "alt1clue2-loc"
+                    var $alt1Clue2Loc = $('textarea[name="altClue2Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue3"
+                    var $alt1Clue3 = $('textarea[name="altClue3"]');
+                    //Variable for referencing the text area whose name equals "alt1clue3-loc"
+                    var $alt1Clue3Loc = $('textarea[name="altClue3Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue4"
+                    var $alt1Clue4 = $('textarea[name="altClue4"]');
+                    //Variable for referencing the text area whose name equals "alt1clue4-loc"
+                    var $alt1Clue4Loc = $('textarea[name="altClue4Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue5"
+                    var $alt1Clue5 = $('textarea[name="altClue5"]');
+                    //Variable for referencing the text area whose name equals "alt1clue5-loc"
+                    var $alt1Clue5Loc = $('textarea[name="altClue5Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue6"
+                    var $alt1Clue6 = $('textarea[name="altClue6"]');
+                    //Variable for referencing the text area whose name equals "alt1clue6-loc"
+                    var $alt1Clue6Loc = $('textarea[name="altClue6Location"]');
+                    //Variable for referencing the text area whose name equals "alt1clue7"
+                    var $alt1Clue7 = $('textarea[name="altClue7"]');
+                    //Variable for referencing the text area whose name equals "alt1clue7-loc"
+                    var $alt1Clue7Loc = $('textarea[name="altClue7Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue1"
+                    var $alt2Clue1 = $('textarea[name="alt2Clue1"]');
+                    //Variable for referencing the text area whose name equals "alt2clue1-loc"
+                    var $alt2Clue1Loc = $('textarea[name="alt2Clue1Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue2"
+                    var $alt2Clue2 = $('textarea[name="alt2Clue2"]');
+                    //Variable for referencing the text area whose name equals "alt2clue2-loc"
+                    var $alt2Clue2Loc = $('textarea[name="alt2Clue2Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue3"
+                    var $alt2Clue3 = $('textarea[name="alt2Clue3"]');
+                    //Variable for referencing the text area whose name equals "alt2clue3-loc"
+                    var $alt2Clue3Loc = $('textarea[name="alt2Clue3Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue4"
+                    var $alt2Clue4 = $('textarea[name="alt2Clue4"]');
+                    //Variable for referencing the text area whose name equals "alt2clue4-loc"
+                    var $alt2Clue4Loc = $('textarea[name="alt2Clue4Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue5"
+                    var $alt2Clue5 = $('textarea[name="alt2Clue5"]');
+                    //Variable for referencing the text area whose name equals "alt2clue5-loc"
+                    var $alt2Clue5Loc = $('textarea[name="alt2Clue5Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue6"
+                    var $alt2Clue6 = $('textarea[name="alt2Clue6"]');
+                    //Variable for referencing the text area whose name equals "alt2clue6-loc"
+                    var $alt2Clue6Loc = $('textarea[name="alt2Clue6Location"]');
+                    //Variable for referencing the text area whose name equals "alt2clue7"
+                    var $alt2Clue7 = $('textarea[name="alt2Clue7"]');
+                    //Variable for referencing the text area whose name equals "alt2clue7-loc"
+                    var $alt2Clue7Loc = $('textarea[name="alt2Clue7Location"]');
+                    //Variable for referencing the text area whose name equals "hunt-finish"
+                    var $huntFinish = $('textarea[name="huntFinish"]');
+                    //Variable for referencing the text area whose name equals "hunt-finish-loc"
+                    var $huntFinishLoc = $('textarea[name="huntFinishLocation"]');
+                    //Variable for referencing the text area whose name equals "messDiv"
+                    var $messDiv = $('#messDiv');
+                    //Variable for referencing the div whose ID equals "formData"
+                    var $formData = $('#formData');
+                    //Assign an event handler to the button, in this case, if the forma data has been submitted via clicking the "submit" button
+                    $formData.submit(function (e) {
+                        //Clear the message div of all children
+                        $messDiv.children().remove();
+                        //If the session ID (represented as a local php variable) have been deleted
+                        if ('<?php echo $view->sessionID; ?>' == "") {
+                            //Redirect to the login page
+                             window.location.href = "login.php";
+                            //Otherwise, if either of the IDs have been found
+                        } else {
+                            //Create a boolean ticket variable with a default value of true
+                            var ticket = true;
+                            //If the hunt name text box element is empty
+                            if ($huntName.value === "") {
+                                //Change the ticket value to false
+                                ticket = false;
+                                //Change the color of the text box to red
+                                $huntName.css("backgroundColor", "red");
+                                //If not
+                            } else {
+                                //Change the color of the text box to white
+                                $huntName.css("backgroundColor", "white");
+                            }
+                            //If the contentText textarea element is empty
+                            if ($clue1.value === "") {
+                                //Change the ticket value to false
+                                ticket = false;
+                                //Change the color of the textarea to red
+                                $clue1.css("backgroundColor", "red");
+                                //If not
+                            } else {
+                                //Change the color of the textarea to white
+                                $clue1.css("backgroundColor", "white");
+                            }
+                            //If the clue1Loc text box element is empty
+                            if ($clue1Loc.value === "") {
+                                //Change the ticket value to false
+                                ticket = false;
+                                //Change the color of the text box to red
+                                $clue1Loc.css("backgroundColor", "red");
+                                //If not
+                            } else {
+                                //Change the color of the text box to white
+                                $clue1Loc.css("backgroundColor", "white");
+                            }
+                            //If the huntFinish textarea element is empty
+                            if ($huntFinish.value === "") {
+                                //Change the ticket value to false
+                                ticket = false;
+                                //Change the color of the textarea to red
+                                $huntFinish.css("backgroundColor", "red");
+                                //If not
+                            } else {
+                                //Change the color of the textarea to white
+                                $huntFinish.css("backgroundColor", "white");
+                            }
+                            //If the huntFinishLoc text box element is empty
+                            if ($huntFinishLoc.value === "") {
+                                //Change the ticket value to false
+                                ticket = false;
+                                //Change the color of the text box to red
+                                $huntFinishLoc.css("backgroundColor", "red");
+                                ////If not
+                            } else {
+                                //Change the color of the text box to white
+                                $huntFinishLoc.css("backgroundColor", "white");
+                            }
+                            //If the clue2 textarea element is not empty and contains any input
+                            if ($clue2.value !== "") {
+                                //If the clue2Loc text box is empty
+                                if ($clue2Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $clue2Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $clue2Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the clue3 textarea element is not empty and contains any input
+                            if ($clue3.value !== "") {
+                                //If the clue3Loc text box is empty
+                                if ($clue3Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $clue3Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $clue3Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the clue4 textarea element is not empty and contains any input
+                            if ($clue4.value !== "") {
+                                //If the clue4Loc text box is empty
+                                if ($clue4Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $clue4Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $clue4Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the clue5 textarea element is not empty and contains any input
+                            if ($clue5.value !== "") {
+                                //If the clue5Loc text box is empty
+                                if ($clue5Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $clue5Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $clue5Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the clue6 textarea element is not empty and contains any input
+                            if ($clue6.value !== "") {
+                                //If the clue6Loc text box is empty
+                                if ($clue6Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $clue6Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $clue6Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the clue7 textarea element is not empty and contains any input
+                            if ($clue7.value !== "") {
+                                //If the clue7Loc text box is empty
+                                if ($clue7Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $clue7Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $clue7Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue1 textarea element is not empty and contains any input
+                            if ($alt1Clue1.value !== "") {
+                                //If the altClue1Loc text box is empty
+                                if ($alt1Clue1Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue1Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue1Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue2 textarea element is not empty and contains any input
+                            if ($alt1Clue2.value !== "") {
+                                //If the altClue2Loc text box is empty
+                                if ($alt1Clue2Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue2Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue2Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue3 textarea element is not empty and contains any input
+                            if ($alt1Clue3.value !== "") {
+                                //If the altClue3Loc text box is empty
+                                if ($alt1Clue3Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue3Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue3Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue4 textarea element is not empty and contains any input
+                            if ($alt1Clue4.value !== "") {
+                                //If the altClue4Loc text box is empty
+                                if ($alt1Clue4Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue4Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue4Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue5 textarea element is not empty and contains any input
+                            if ($alt1Clue5.value !== "") {
+                                //If the altClue5Loc text box is empty
+                                if ($alt1Clue5Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue5Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue5Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue6 textarea element is not empty and contains any input
+                            if ($alt1Clue6.value !== "") {
+                                //If the altClue6Loc text box is empty
+                                if ($alt1Clue6Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue6Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue6Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the altClue7 textarea element is not empty and contains any input
+                            if ($alt1Clue7.value !== "") {
+                                //If the altClue7Loc text box is empty
+                                if ($alt1Clue7Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt1Clue7Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt1Clue7Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue1 textarea element is not empty and contains any input
+                            if ($alt2Clue1.value !== "") {
+                                //If the alt2Clue1Loc text box is empty
+                                if ($alt2Clue1Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue1Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue1Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue2 textarea element is not empty and contains any input
+                            if ($alt2Clue2.value !== "") {
+                                //If the alt2Clue2Loc text box is empty
+                                if ($alt2Clue2Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue2Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue2Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue3 textarea element is not empty and contains any input
+                            if ($alt2Clue3.value !== "") {
+                                //If the alt2Clue3Loc text box is empty
+                                if ($alt2Clue3Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue3Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue3Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue1 textarea element is not empty and contains any input
+                            if ($alt2Clue4.value !== "") {
+                                //If the alt2Clue1Loc text box is empty
+                                if ($alt2Clue4Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue4Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue4Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue5 textarea element is not empty and contains any input
+                            if ($alt2Clue5.value !== "") {
+                                //If the alt2Clue5Loc text box is empty
+                                if ($alt2Clue5Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue5Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue5Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue6 textarea element is not empty and contains any input
+                            if ($alt2Clue6.value !== "") {
+                                //If the alt2Clue6Loc text box is empty
+                                if ($alt2Clue6Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue6Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue6Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the alt2Clue7 textarea element is not empty and contains any input
+                            if ($alt2Clue7.value !== "") {
+                                //If the alt2Clue7Loc text box is empty
+                                if ($alt2Clue7Loc.value === "") {
+                                    //Change the ticket value to false
+                                    ticket = false;
+                                    //Change the color of the text box to red
+                                    $alt2Clue7Loc.css("backgroundColor", "red");
+                                    //If not
+                                } else {
+                                    //Change the color of the text box to white
+                                    $alt2Clue7Loc.css("backgroundColor", "white");
+                                }
+                            }
+                            //If the ticket value is false
+                            if (ticket === false) {
+                                //Assign a text node to the message div
+                                $messDiv.append('<p>Some required details are emtpy/invalid. Inquiry cannot be sent</p>');
+                                //If the ticket value is true
+                            } else {
+                                //Submit the form using AJAX.
+                                $.ajax({
+                                    //Set the type to "POST"
+                                    type: 'POST',
+                                    //Set the destination url as the form's action
+                                    url: $formData.attr('action'),
+                                    //Set the data to be sent as the data array defined before
+                                    data: $formData.serialize()
+                                            //data: new FormData($formData)
+                                }).done(function (response) {
+                                    //Once successful, redirect to the messageSent page
+                                    window.location.href = "huntListing.php";
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

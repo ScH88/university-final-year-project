@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><?php echo $view->pageTitle; ?> - TreasureQuest</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css" media="all">
+        <!-- Custom styles for this template -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php require('template/header.phtml') ?>
+        <main>
+            <section>
+                <div class="container-fluid">
+                    <div class="row">
+                        <h1>Sign Up - New User Account</h1>
+                        <form method="post" enctype="multipart/form-data" id="newUserForm" action="control.php?action=createNewUser">
+                            <div class="form-group row">
+                                <div class="col-sm-1"></div>
+                                <label for="hunt-name-input" class="col-sm-2 col-form-label">
+                                    Username(*): 
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="hunt-name-input" name="userName" class="form-control"/>                            
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-1"></div>
+                                <label for="file-upload-input" class="col-sm-2 col-form-label">
+                                    Your Avatar (Optional): 
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="file" id="file-upload-input" name="fileToUpload" class="form-control"/>                            
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <input type="hidden" name="userAvatar"/>
+                            <div class="form-group row">
+                                <div class="col-sm-1"></div>
+                                <label for="password-input" class="col-sm-2 col-form-label">
+                                    Password(*): 
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="password-input" name="password" class="form-control"/>                            
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-1"></div>
+                                <label for="password-repeat-input" class="col-sm-2 col-form-label">
+                                    Repeat Password(*): 
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="password-repeat-input" name="passwordRepeat" class="form-control"/>                            
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <div class="flex-holder">
+                                        <input name="submit" type="submit" class="btn btn-primary btn-lg btn-block hidden-print" value="Submit">
+                                    </div>
+                                    <div id="messageForm">(*) - Compulsory fields</div> 
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div> 
+                        </form> 
+                    </div> 
+                </div>
+            </section>
+
+        </main>
+        <?php require('template/footer.phtml') ?>
+        <script type="text/javascript">
+            //Create a variable for storing the value of the php page's latitude variable
+            var checkLat = '<?php echo $view->latitude; ?>';
+            //Create a variable for storing the value of the php page's longitude variable
+            var checkLng = '<?php echo $view->longitude; ?>';
+            //Create a variable for storing the value of the php page's accuracy variable
+            var checkAcc = '<?php echo $view->accuracy; ?>';
+
+            //If the latitude, longitude and accuracy all equal false (i.e. if the user is not operating a mobile device and/or is logged off
+            if (checkLat === false && checkLng === false && checkAcc === false) {
+                //Do Nothing 
+                //Otherwise, if the latitude, longitude and accuracy variables all equal true (i.e. if the user is operating a mobile device and is logged on)
+            } else {
+                //If the device picks up a location via router or radio mast
+                if (navigator.geolocation) {
+                    //Set up the location details in the followign function
+                    navigator.geolocation.watchPosition(function (loc) {
+                        //Create a form element for storing the location details
+                        var userLocation = new Element('form', {
+                            'id': 'userLocForm',
+                            'name': 'userLocForm',
+                            'action': '#',
+                            'method': 'post'
+                        });
+                        //Create a hidden input variable for storing the location's latitude
+                        new Element('input', {
+                            'id': 'latitude',
+                            'name': 'latitude',
+                            'type': 'hidden',
+                            'value': loc.coords.latitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's longitude
+                        new Element('input', {
+                            'id': 'longitude',
+                            'name': 'longitude',
+                            'type': 'hidden',
+                            'value': loc.coords.longitude
+                        }).inject(userLocation);
+                        //Create a hidden input variable for storing the location's accuracy
+                        new Element('input', {
+                            'id': 'accuracy',
+                            'name': 'accuracy',
+                            'type': 'hidden',
+                            'value': loc.coords.accuracy
+                        }).inject(userLocation);
+                        //Create a request to send the form to the control.php page before calling it's userLocation method
+                        var req = new Request.JSON({
+                            url: 'control.php?action=userLocation',
+                            onsuccess: ""
+                        }).post(userLocation);
+                        //Send the request
+                        req.send();
+                        //If the user chooses to share his/her location details
+                        if (console)
+                            console.log(loc);
+                        //Perform the following function
+                    }, function () {
+                    }, {enableHighAccuracy: true});
+                    //Otherwise, if the user chooses to not share his/her location details
+                } else {
+                    //Do Nothing
+                }
+            }
+        </script>
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $.noConflict();
+                $(document).ready(function () {
+                    //Variable for referencing the input field whose name equals "hunt-name"
+                    var $userName = $('input[name="userName"]');
+                    //Variable for referencing the input field whose name equals "hunt-name"
+                    var $userAvatar = $('input[name="userAvatar"]');
+                    //Variable for referencing the input field whose name equals "hunt-name"
+                    var $fileToUpload = $('input[name="fileToUpload"]');
+                    //Variable for referencing the input field whose name equals "hunt-name"
+                    var $password = $('input[name="password"]');
+                    //Variable for referencing the input field whose name equals "hunt-name"
+                    var $passwordRepeat = $('input[name="passwordRepeat"]');
+                    //Create a variable by getting the php div whose id is "newUserForm" from the body
+                    var $formDiv = $("#newUserForm");
+                    //Create a variable by getting the php div whose id is "messageForm" from the body
+                    var $messDiv = $("#messageForm");
+                    //Attach a keydown listener to the password input
+                    $password.keydown(function () {
+                        //Remove all children in the message div
+                        $messDiv.children().remove();
+                        //If the password text box has less than 8 characters
+                        if (($password.value).length < 8) {
+                            //Attach the following message to the text node
+                            $messDiv.append('<p>Password Strength: Weak (8 characters and under)');
+                            //If the password text box has the number of characters between 7 and 16
+                        } else if ((($password.value).length > 7) && (($password.value).length < 16)) {
+                            //Attach the following message to the text node
+                            $messDiv.append('<p>Password Strength: Medium (between 8 and 16 characters)</p>');
+                            //If the password text box has more than 15 characters
+                        } else if (($password.value).length > 15) {
+                            //Attach the following message to the text node
+                            $messDiv.append('<p>Password Strength: Strong (more than 16 characters)</p>');
+                        }
+                    });
+                    //Assign an event handler to the form, in this case, if the form has been submitted
+                    $formDiv.addEvent('submit', function (e) {
+                        //Set the userAvatar hidden value as the fileToUpload
+                        $userAvatar.attr("value", $fileToUpload.value);
+                        //Stop the page from refreshing
+                        e.stop();
+                        //Remove all children in the message div
+                        $messDiv.children().remove();
+                        //Create a boolean-based ticket variable with a default value of true
+                        var ticket = true;
+                        //If the username text box element is empty
+                        if ($userName.value === "") {
+                            //Change the color of the text box to red
+                            $userName.css("backgroundColor", "red");
+                            //Set ticket to false
+                            ticket = false;
+                            //If not
+                        } else {
+                            //Change the color of the text box to white
+                            $userName.css("backgroundColor", "white");
+                        }
+                        //If the password text box element is empty
+                        if ($password.value === "") {
+                            //Change the color of the text box to red
+                            $password.css("backgroundColor", "red");
+                            //Set ticket  to false
+                            ticket = false;
+                            //If not
+                        } else {
+                            //Change the color of the text box to white
+                            $password.css("backgroundColor", "white");
+                            //passwordText box's input is not equal to the password repeat text box
+                            if ($password.value !== $passwordRepeat.value) {
+                                //Change the color of the password text box to red
+                                $password.css("backgroundColor", "red");
+                                //Change the color of the password repeat text box to red
+                                $passwordRepeat.css("backgroundColor", "red");
+                                //Set ticket  to false
+                                ticket = false;
+                                //If not
+                            } else {
+                                //Change the color of the password text box to white
+                                $password.css("backgroundColor", "white");
+                                //Change the color of the password repeat text box to white
+                                $passwordRepeat.css("backgroundColor", "white");
+                            }
+                        }
+                        //If the ticket value has been changed to false
+                        if (ticket === false) {
+                            //Assign a text node to the message div
+                            $messDiv.append("<p>User creation has failed - Important details are either missing or incorrect</p>");
+                            //If the ticket value remains true
+                        } else if (ticket === true) {
+                            //Submit the form using AJAX.
+                            $.ajax({
+                                //Set the type to "POST"
+                                type: 'POST',
+                                //Set the destination url as the form's action
+                                url: $formDiv.attr('action'),
+                                //Set the data to be sent as the data array defined before
+                                data: $formDiv.serialize()
+                                        //data: new FormData($formData)
+                            }).done(function (response) {
+                                //Once successful, redirect to the messageSent page
+                                window.location.href = "login.php";
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

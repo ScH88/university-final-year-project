@@ -1,0 +1,68 @@
+/* 
+*
+*
+* POINT OF MOBILE/TABLET NAVBAR COMPRESSION & CONTAINER-FLUID REPOSITIONING 
+*
+*
+*/
+
+@media (max-width:767px) {
+
+    /* NAVIGATION */
+    .navbar-nav > li > a {
+        margin-top: 10px !important; 
+        margin-bottom: 5px !important; 
+    }
+    
+    .navbar-collapse {
+        margin-top:10px;
+    }
+    
+    /* IMAGES */    
+    .banner-image {
+        height:65px;
+    }
+    
+    .image {
+        display:block;
+        margin:20px auto 0 auto;
+    }
+   
+    /* FOOTER */
+    .footer-main {
+        ul {
+            margin-bottom: 20px;
+            text-align:center;
+        }
+
+        h4 {
+            text-align:center;
+        }
+    }
+}
+
+@media (max-width:640px) {
+    /* COMPONENTS */
+    .gpsDiv {
+        height:330px;
+    } 
+}
+
+@media (max-width:480px) {
+    /* COMPONENTS */ 
+    .gpsDiv {
+        height:200px;
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+        font-size:2em;
+    } 
+}
+
+@media (max-width:320px) {
+    /* IMAGES */ 
+    .banner-image {
+        height:60px;
+    } 
+}

@@ -1,0 +1,14 @@
+/* STANDARD BLOCKS */
+
+.block {
+    padding:$block-padding;
+}
+
+.block-light {
+    @extend .block;
+    @include add-background($primary-blue);
+}
+
+.block-center {
+    text-align:center !important;
+}
